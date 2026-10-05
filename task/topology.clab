@@ -1,0 +1,65 @@
+name: lab-computer-network-001
+
+topology:
+  groups:
+    routers:
+      kind: linux
+      image: quay.io/frrouting/frr:containerlab-10.7.1
+    hosts:
+      kind: linux
+      image: ghcr.io/nicolaka/netshoot:v0.16
+
+  nodes:
+    r1:
+      labels:
+        flow_icon: router
+      group: routers
+      binds:
+        - configs/r1/daemons:/etc/frr/daemons
+        - configs/r1/frr.conf:/etc/frr/frr.conf
+      exec:
+        - /bin/sh -c "echo admin:admin | chpasswd"
+    r2:
+      labels:
+        flow_icon: router
+      group: routers
+      binds:
+        - configs/r2/daemons:/etc/frr/daemons
+        - configs/r2/frr.conf:/etc/frr/frr.conf
+      exec:
+        - /bin/sh -c "echo admin:admin | chpasswd"
+    pc1:
+      labels:
+        flow_icon: pc
+      group: hosts
+      exec:
+        - /bin/sh -c "adduser -D -s /bin/sh admin 2>/dev/null || true"
+        - /bin/sh -c "echo admin:admin | chpasswd"
+        - ssh-keygen -A
+        - mkdir -p /run/sshd
+        - /bin/sh -c "echo PasswordAuthentication=yes >> /etc/ssh/sshd_config"
+        - /usr/sbin/sshd
+        - ip link set eth1 up
+        - ip addr flush dev eth1
+        - /bin/sh -c "ip route flush dev eth1 2>/dev/null || true"
+        - /bin/sh -c "ip neigh flush dev eth1 2>/dev/null || true"
+    pc2:
+      labels:
+        flow_icon: pc
+      group: hosts
+      exec:
+        - /bin/sh -c "adduser -D -s /bin/sh admin 2>/dev/null || true"
+        - /bin/sh -c "echo admin:admin | chpasswd"
+        - ssh-keygen -A
+        - mkdir -p /run/sshd
+        - /bin/sh -c "echo PasswordAuthentication=yes >> /etc/ssh/sshd_config"
+        - /usr/sbin/sshd
+        - ip link set eth1 up
+        - ip addr flush dev eth1
+        - /bin/sh -c "ip route flush dev eth1 2>/dev/null || true"
+        - /bin/sh -c "ip neigh flush dev eth1 2>/dev/null || true"
+
+  links:
+    - endpoints: ["pc1:eth1", "r1:eth1"]
+    - endpoints: ["r1:eth2", "r2:eth1"]
+    - endpoints: ["r2:eth2", "pc2:eth1"]

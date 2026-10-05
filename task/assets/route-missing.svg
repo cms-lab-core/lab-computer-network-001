@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="820" viewBox="0 0 1600 820">
+<rect width="1600" height="820" fill="#fff"/>
+<style>
+.node { fill:#fff; stroke:#5f6368; stroke-width:3; }
+.link { stroke:#747b83; stroke-width:6; stroke-linecap:round; }
+.title { font:700 34px 'DejaVu Sans',Arial,sans-serif; fill:#202124; }
+.subtitle { font:20px 'DejaVu Sans',Arial,sans-serif; fill:#5f6368; }
+.node-name { font:700 28px 'DejaVu Sans',Arial,sans-serif; fill:#202124; }
+.node-sub { font:18px 'DejaVu Sans',Arial,sans-serif; fill:#5f6368; }
+.net { font:17px 'DejaVu Sans',Arial,sans-serif; fill:#5f6368; }
+.status { font:700 22px 'DejaVu Sans',Arial,sans-serif; fill:#202124; }
+.panel-title { font:700 25px 'DejaVu Sans',Arial,sans-serif; fill:#202124; }
+.mono { font:20px 'DejaVu Sans Mono',monospace; fill:#202124; }
+.mono-b { font:700 20px 'DejaVu Sans Mono',monospace; fill:#202124; }
+.packet { fill:#1a73e8; stroke:#0b57d0; stroke-width:2; }
+.packet-text { font:700 19px 'DejaVu Sans',Arial,sans-serif; fill:#fff; }
+
+@keyframes packet-missing {
+  0%   { transform:translate(168px,285px); opacity:1; }
+  28%  { transform:translate(590px,285px); opacity:1; }
+  92%  { transform:translate(590px,285px); opacity:1; }
+  93%  { transform:translate(590px,285px); opacity:0; }
+  94%  { transform:translate(168px,285px); opacity:0; }
+  99%  { transform:translate(168px,285px); opacity:0; }
+  100% { transform:translate(168px,285px); opacity:1; }
+}
+@keyframes phase1 {
+  0%,31% { opacity:1; }
+  32%,100% { opacity:0; }
+}
+@keyframes phase2 {
+  0%,32% { opacity:0; }
+  33%,61% { opacity:1; }
+  62%,100% { opacity:0; }
+}
+@keyframes phase3 {
+  0%,62% { opacity:0; }
+  63%,92% { opacity:1; }
+  93%,100% { opacity:0; }
+}
+@keyframes lookup-panel {
+  0%,32% { opacity:0; }
+  33%,92% { opacity:1; }
+  93%,100% { opacity:0; }
+}
+@keyframes route-miss {
+  0%,43% { opacity:0; }
+  44%,92% { opacity:1; }
+  93%,100% { opacity:0; }
+}
+@keyframes stop-pulse {
+  0%,62% { opacity:0; transform:scale(.92); transform-origin:735px 285px; }
+  63% { opacity:1; transform:scale(1); }
+  72% { opacity:.55; transform:scale(.96); }
+  80% { opacity:1; transform:scale(1.04); }
+  88% { opacity:.65; transform:scale(.98); }
+  92% { opacity:1; transform:scale(1); }
+  93%,100% { opacity:0; transform:scale(.92); }
+}
+.packet-missing { animation:packet-missing 10s linear infinite; }
+.phase1 { animation:phase1 10s linear infinite; }
+.phase2 { animation:phase2 10s linear infinite; }
+.phase3 { animation:phase3 10s linear infinite; }
+.lookup-panel { animation:lookup-panel 10s linear infinite; }
+.route-miss { animation:route-miss 10s linear infinite; }
+.stop { animation:stop-pulse 10s linear infinite; }
+</style>
+
+<text class="title" x="800" y="54" text-anchor="middle">Почему пакет не доходит до pc2?</text>
+<text class="subtitle" x="800" y="94" text-anchor="middle">R1 видит R2 по транзитной сети, но ещё не знает маршрут к LAN-B</text>
+
+
+<line class="link" x1="260" y1="285" x2="485" y2="285"/>
+<line class="link" x1="695" y1="285" x2="885" y2="285"/>
+<line class="link" x1="1095" y1="285" x2="1320" y2="285"/>
+
+<rect class="node" x="75" y="220" width="185" height="130" rx="22"/>
+<text class="node-name" x="168" y="278" text-anchor="middle">pc1</text>
+<text class="node-sub" x="168" y="315" text-anchor="middle">192.168.10.10/24</text>
+
+<rect class="node" x="485" y="190" width="210" height="190" rx="22"/>
+<text class="node-name" x="590" y="268" text-anchor="middle">r1</text>
+<text class="node-sub" x="590" y="307" text-anchor="middle">FRRouting</text>
+
+<rect class="node" x="885" y="190" width="210" height="190" rx="22"/>
+<text class="node-name" x="990" y="268" text-anchor="middle">r2</text>
+<text class="node-sub" x="990" y="307" text-anchor="middle">FRRouting</text>
+
+<rect class="node" x="1320" y="220" width="185" height="130" rx="22"/>
+<text class="node-name" x="1412" y="278" text-anchor="middle">pc2</text>
+<text class="node-sub" x="1412" y="315" text-anchor="middle">192.168.20.10/24</text>
+
+<text class="net" x="372" y="248" text-anchor="middle">192.168.10.0/24</text>
+<text class="net" x="790" y="248" text-anchor="middle">10.0.12.0/30</text>
+<text class="net" x="1207" y="248" text-anchor="middle">192.168.20.0/24</text>
+
+
+<g class="packet-missing">
+  <rect class="packet" x="-48" y="-28" width="96" height="56" rx="12"/>
+  <text class="packet-text" x="0" y="7" text-anchor="middle">IP</text>
+</g>
+
+<rect x="250" y="420" width="1100" height="78" rx="20" fill="#f8f9fa" stroke="#d0d7de" stroke-width="2"/>
+<g class="phase1">
+  <text class="status" x="800" y="468" text-anchor="middle">pc1: маршрут к LAN-B → отправляем пакет через gateway R1</text>
+</g>
+<g class="phase2">
+  <text class="status" x="800" y="468" text-anchor="middle">R1: ищем маршрут для destination 192.168.20.10</text>
+</g>
+<g class="phase3">
+  <text class="status" x="800" y="468" text-anchor="middle" fill="#b3261e">R1: подходящего маршрута нет → пакет не пересылается дальше</text>
+</g>
+
+<g class="lookup-panel">
+  <rect x="300" y="535" width="1000" height="205" rx="24" fill="#fff" stroke="#d0d7de" stroke-width="3"/>
+  <text class="panel-title" x="350" y="582">Routing table R1</text>
+  <text class="mono" x="350" y="626">C 192.168.10.0/24   directly connected, eth1</text>
+  <text class="mono" x="350" y="666">C 10.0.12.0/30      directly connected, eth2</text>
+  <g class="route-miss">
+    <rect x="338" y="688" width="760" height="38" rx="9" fill="#fce8e6"/>
+    <text class="mono-b" x="350" y="715" fill="#b3261e">192.168.20.0/24      route not found</text>
+  </g>
+</g>
+
+<g class="stop">
+  <circle cx="735" cy="285" r="42" fill="#fce8e6" stroke="#d93025" stroke-width="6"/>
+  <line x1="713" y1="263" x2="757" y2="307" stroke="#d93025" stroke-width="10" stroke-linecap="round"/>
+  <line x1="757" y1="263" x2="713" y2="307" stroke="#d93025" stroke-width="10" stroke-linecap="round"/>
+  <text class="mono-b" x="735" y="355" text-anchor="middle" fill="#b3261e">STOP</text>
+</g>
+</svg>
