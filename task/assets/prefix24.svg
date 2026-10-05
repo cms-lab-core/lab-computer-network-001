@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1250" height="262" viewBox="0 0 1000 210">
+<rect width="1000" height="210" fill="white"/>
+<style>
+ text { font-family: DejaVu Sans, Arial, sans-serif; fill:#202124; }
+ .mono { font-family: DejaVu Sans Mono, monospace; }
+ .label { font-size:16px; fill:#5f6368; }
+ .big { font-size:26px; font-weight:600; }
+ .box { stroke:#5f6368; stroke-width:2; }
+</style>
+<text class="big mono" x="500" y="42" text-anchor="middle">192.168.10.10/24</text>
+<rect class="box" x="100" y="78" width="600" height="62" fill="#f1f3f4"/>
+<rect class="box" x="700" y="78" width="200" height="62" fill="#ffffff"/>
+<text class="mono" x="400" y="117" text-anchor="middle" font-size="20">192 . 168 . 10</text>
+<text class="mono" x="800" y="117" text-anchor="middle" font-size="20">10</text>
+<text class="label" x="400" y="170" text-anchor="middle">первые 24 бита — сеть</text>
+<text class="label" x="800" y="170" text-anchor="middle">последние 8 — узел</text>
+</svg>

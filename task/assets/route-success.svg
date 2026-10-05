@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="820" viewBox="0 0 1600 820">
+<rect width="1600" height="820" fill="#fff"/>
+<style>
+.node { fill:#fff; stroke:#5f6368; stroke-width:3; }
+.link { stroke:#747b83; stroke-width:6; stroke-linecap:round; }
+.title { font:700 34px 'DejaVu Sans',Arial,sans-serif; fill:#202124; }
+.subtitle { font:20px 'DejaVu Sans',Arial,sans-serif; fill:#5f6368; }
+.node-name { font:700 28px 'DejaVu Sans',Arial,sans-serif; fill:#202124; }
+.node-sub { font:18px 'DejaVu Sans',Arial,sans-serif; fill:#5f6368; }
+.net { font:17px 'DejaVu Sans',Arial,sans-serif; fill:#5f6368; }
+.status { font:700 22px 'DejaVu Sans',Arial,sans-serif; fill:#202124; }
+.panel-title { font:700 25px 'DejaVu Sans',Arial,sans-serif; fill:#202124; }
+.mono { font:20px 'DejaVu Sans Mono',monospace; fill:#202124; }
+.mono-b { font:700 20px 'DejaVu Sans Mono',monospace; fill:#202124; }
+.packet { fill:#1a73e8; stroke:#0b57d0; stroke-width:2; }
+.packet-text { font:700 19px 'DejaVu Sans',Arial,sans-serif; fill:#fff; }
+
+@keyframes packet-success {
+  0%   { transform:translate(168px,285px); opacity:1; }
+  27%  { transform:translate(590px,285px); opacity:1; }
+  30%  { transform:translate(590px,285px); opacity:1; }
+  57%  { transform:translate(990px,285px); opacity:1; }
+  60%  { transform:translate(990px,285px); opacity:1; }
+  87%  { transform:translate(1412px,285px); opacity:1; }
+  91%  { transform:translate(1412px,285px); opacity:1; }
+  92%  { transform:translate(1412px,285px); opacity:0; }
+  93%  { transform:translate(168px,285px); opacity:0; }
+  99%  { transform:translate(168px,285px); opacity:0; }
+  100% { transform:translate(168px,285px); opacity:1; }
+}
+@keyframes s1 {
+  0%,30% { opacity:1; }
+  31%,100% { opacity:0; }
+}
+@keyframes s2 {
+  0%,30% { opacity:0; }
+  31%,60% { opacity:1; }
+  61%,100% { opacity:0; }
+}
+@keyframes s3 {
+  0%,60% { opacity:0; }
+  61%,91% { opacity:1; }
+  92%,100% { opacity:0; }
+}
+@keyframes r1event {
+  0%,27% { opacity:0; }
+  28%,35% { opacity:1; }
+  36%,100% { opacity:0; }
+}
+@keyframes r2event {
+  0%,57% { opacity:0; }
+  58%,65% { opacity:1; }
+  66%,100% { opacity:0; }
+}
+.packet-success { animation:packet-success 10s linear infinite; }
+.s1 { animation:s1 10s linear infinite; }
+.s2 { animation:s2 10s linear infinite; }
+.s3 { animation:s3 10s linear infinite; }
+.r1event { animation:r1event 10s linear infinite; }
+.r2event { animation:r2event 10s linear infinite; }
+</style>
+
+<text class="title" x="800" y="54" text-anchor="middle">Один IP-пакет проходит через два маршрутизатора</text>
+<text class="subtitle" x="800" y="94" text-anchor="middle">IP destination не меняется; Ethernet next-hop и TTL меняются на каждом hop</text>
+
+
+<line class="link" x1="260" y1="285" x2="485" y2="285"/>
+<line class="link" x1="695" y1="285" x2="885" y2="285"/>
+<line class="link" x1="1095" y1="285" x2="1320" y2="285"/>
+
+<rect class="node" x="75" y="220" width="185" height="130" rx="22"/>
+<text class="node-name" x="168" y="278" text-anchor="middle">pc1</text>
+<text class="node-sub" x="168" y="315" text-anchor="middle">192.168.10.10/24</text>
+
+<rect class="node" x="485" y="190" width="210" height="190" rx="22"/>
+<text class="node-name" x="590" y="268" text-anchor="middle">r1</text>
+<text class="node-sub" x="590" y="307" text-anchor="middle">FRRouting</text>
+
+<rect class="node" x="885" y="190" width="210" height="190" rx="22"/>
+<text class="node-name" x="990" y="268" text-anchor="middle">r2</text>
+<text class="node-sub" x="990" y="307" text-anchor="middle">FRRouting</text>
+
+<rect class="node" x="1320" y="220" width="185" height="130" rx="22"/>
+<text class="node-name" x="1412" y="278" text-anchor="middle">pc2</text>
+<text class="node-sub" x="1412" y="315" text-anchor="middle">192.168.20.10/24</text>
+
+<text class="net" x="372" y="248" text-anchor="middle">192.168.10.0/24</text>
+<text class="net" x="790" y="248" text-anchor="middle">10.0.12.0/30</text>
+<text class="net" x="1207" y="248" text-anchor="middle">192.168.20.0/24</text>
+
+
+<line class="s1" x1="260" y1="285" x2="485" y2="285" stroke="#1a73e8" stroke-width="10" stroke-linecap="round"/>
+<line class="s2" x1="695" y1="285" x2="885" y2="285" stroke="#1a73e8" stroke-width="10" stroke-linecap="round"/>
+<line class="s3" x1="1095" y1="285" x2="1320" y2="285" stroke="#1a73e8" stroke-width="10" stroke-linecap="round"/>
+
+<g class="packet-success">
+  <rect class="packet" x="-48" y="-28" width="96" height="56" rx="12"/>
+  <text class="packet-text" x="0" y="7" text-anchor="middle">IP</text>
+</g>
+
+<rect x="250" y="430" width="1100" height="265" rx="24" fill="#eef7ee" stroke="#188038" stroke-width="3"/>
+<text class="panel-title" x="305" y="480">Заголовки текущего Ethernet-сегмента</text>
+
+<g class="s1">
+  <text class="mono-b" x="305" y="540">Ethernet dst = MAC R1</text>
+  <text class="mono" x="305" y="586">IP dst       = 192.168.20.10</text>
+  <text class="mono" x="305" y="632">TTL          = 64</text>
+</g>
+<g class="s2">
+  <text class="mono-b" x="305" y="540">Ethernet dst = MAC R2</text>
+  <text class="mono" x="305" y="586">IP dst       = 192.168.20.10</text>
+  <text class="mono" x="305" y="632">TTL          = 63</text>
+</g>
+<g class="s3">
+  <text class="mono-b" x="305" y="540">Ethernet dst = MAC PC2</text>
+  <text class="mono" x="305" y="586">IP dst       = 192.168.20.10</text>
+  <text class="mono" x="305" y="632">TTL          = 62</text>
+</g>
+
+<g class="r1event">
+  <rect x="455" y="130" width="270" height="52" rx="14" fill="#e6f4ea" stroke="#188038" stroke-width="2"/>
+  <text class="subtitle" x="590" y="163" text-anchor="middle" fill="#137333">R1: новый Ethernet header</text>
+</g>
+<g class="r2event">
+  <rect x="855" y="130" width="270" height="52" rx="14" fill="#e6f4ea" stroke="#188038" stroke-width="2"/>
+  <text class="subtitle" x="990" y="163" text-anchor="middle" fill="#137333">R2: новый Ethernet header</text>
+</g>
+</svg>
